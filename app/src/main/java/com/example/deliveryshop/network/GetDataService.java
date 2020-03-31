@@ -7,6 +7,6 @@ import retrofit2.http.GET;
 
 public interface GetDataService {
 
-    @GET("/api/v1/products")
+    @GET("products")
     Call<OrderList> getAllOrders();
 }
