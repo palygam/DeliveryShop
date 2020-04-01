@@ -20,6 +20,13 @@ public class OrderList {
     @Expose
     private Object errorDescription;
 
+    public OrderList(List<Order> data, Boolean success) {
+        this.data = data;
+        this.success = success;
+        this.errorCode = errorCode;
+        this.errorDescription = errorDescription;
+    }
+
     public List<Order> getData() {
         return data;
     }

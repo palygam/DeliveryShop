@@ -2,4 +2,11 @@
     <string name="app_name">DeliveryShop</string>
     <string name="no_information">No information</string>
     <string name="networking_error">An error occurred during networking</string>
+    <string name="edit_text_id">Enter id</string>
+    <string name="edit_text_name">Enter name</string>
+    <string name="edit_text_count">Enter amount</string>
+    <string name="edit_text_price">Enter price</string>
+    <string name="edit_text_delivery_country">Enter the country of destination</string>
+    <string name="edit_text_delivery_city">Enter the city of destination</string>
+    <string name="button_save">Save</string>
 </resources>

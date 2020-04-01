@@ -1,4 +1,4 @@
-package com.example.deliveryshop.view;
+package com.example.deliveryshop.showproducts;
 
 import com.example.deliveryshop.CustomApplication;
 import com.example.deliveryshop.model.Order;
@@ -10,11 +10,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainPresenter {
-    private MainView view;
+public class ShowProductsPresenter {
+    private ShowProductsView view;
     private List<Order> orders;
 
-    public MainPresenter(MainView view) {
+    public ShowProductsPresenter(ShowProductsView view) {
         this.view = view;
     }
 

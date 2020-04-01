@@ -1,4 +1,4 @@
-package com.example.deliveryshop.view;
+package com.example.deliveryshop.showproducts;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,17 +30,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         Order order = orders.get(position);
         if (order != null) {
-            holder.id.setText(order.getId());
             holder.name.setText(order.getName());
             holder.count.setText(String.valueOf(order.getCount()));
             holder.price.setText(String.valueOf(order.getPrice()));
-            holder.delivery.setText(order.getDelivery().toString());
+            if (order.getDelivery() != null) {
+                holder.deliveryCountry.setText(String.valueOf(order.getDelivery().getCountry()));
+                holder.deliveryCity.setText(String.valueOf(order.getDelivery().getCity()));
         } else {
-            holder.id.setText(R.string.no_information);
-            holder.name.setText(R.string.no_information);
-            holder.count.setText((R.string.no_information));
-            holder.price.setText((R.string.no_information));
-            holder.delivery.setText((R.string.no_information));
+                holder.deliveryCity.setText((R.string.no_information));
+                holder.deliveryCountry.setText((R.string.no_information));
+            }
         }
     }
 
@@ -52,20 +51,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView id;
         TextView name;
         TextView count;
         TextView price;
-        TextView delivery;
+        TextView deliveryCity;
+        TextView deliveryCountry;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            id = itemView.findViewById(R.id.order_id);
             name = itemView.findViewById(R.id.order_name);
             count = itemView.findViewById(R.id.order_count);
             price = itemView.findViewById(R.id.order_price);
-            delivery = itemView.findViewById(R.id.order_delivery);
-
+            deliveryCountry = itemView.findViewById(R.id.delivery_country);
+            deliveryCity = itemView.findViewById(R.id.delivery_city);
         }
     }
 }

@@ -1,20 +1,17 @@
-package com.example.deliveryshop.view;
+package com.example.deliveryshop.showproducts;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.widget.Toast;
-
 import com.example.deliveryshop.R;
 import com.example.deliveryshop.base.BaseActivity;
-
 import java.util.List;
 
 
-public class MainActivity extends BaseActivity implements MainView {
-    private MainPresenter presenter;
+public class ShowProductsActivity extends BaseActivity implements ShowProductsView {
+    private ShowProductsPresenter presenter;
     private RecyclerView recyclerView;
 
     @Override
@@ -23,7 +20,7 @@ public class MainActivity extends BaseActivity implements MainView {
         setContentView(getLayoutId());
         initRecyclerView();
         setupToolbar();
-        presenter = new MainPresenter(this);
+        presenter = new ShowProductsPresenter(this);
         presenter.generateRetrofitCall();
     }
 
@@ -52,11 +49,11 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_main;
+        return R.layout.activity_show_products;
     }
 
     @Override
     public void showError() {
-        Toast.makeText(MainActivity.this, R.string.networking_error, Toast.LENGTH_SHORT).show();
+        Toast.makeText(ShowProductsActivity.this, R.string.networking_error, Toast.LENGTH_SHORT).show();
     }
 }
