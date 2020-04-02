@@ -1,11 +1,10 @@
 package com.example.deliveryshop.showproducts;
 
+import android.content.Context;
 import com.example.deliveryshop.CustomApplication;
 import com.example.deliveryshop.model.Order;
 import com.example.deliveryshop.model.OrderList;
-
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,5 +31,9 @@ public class ShowProductsPresenter {
                 view.showError();
             }
         });
+    }
+
+    public void onClick(Context context, Class newActivity) {
+        view.navigateToNewActivity(context, newActivity);
     }
 }

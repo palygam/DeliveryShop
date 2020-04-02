@@ -9,18 +9,18 @@ public class OrderList {
 
     @SerializedName("Data")
     @Expose
-    private List<Order> data = null;
+    private List<Order> data;
     @SerializedName("Success")
     @Expose
     private Boolean success;
     @SerializedName("ErrorCode")
     @Expose
-    private Object errorCode;
+    private String errorCode;
     @SerializedName("ErrorDescription")
     @Expose
-    private Object errorDescription;
+    private String errorDescription;
 
-    public OrderList(List<Order> data, Boolean success) {
+    public OrderList(List<Order> data, Boolean success, String errorCode, String errorDescription) {
         this.data = data;
         this.success = success;
         this.errorCode = errorCode;
@@ -43,19 +43,19 @@ public class OrderList {
         this.success = success;
     }
 
-    public Object getErrorCode() {
+    public String getErrorCode() {
         return errorCode;
     }
 
-    public void setErrorCode(Object errorCode) {
+    public void setErrorCode(String errorCode) {
         this.errorCode = errorCode;
     }
 
-    public Object getErrorDescription() {
+    public String getErrorDescription() {
         return errorDescription;
     }
 
-    public void setErrorDescription(Object errorDescription) {
+    public void setErrorDescription(String errorDescription) {
         this.errorDescription = errorDescription;
     }
 

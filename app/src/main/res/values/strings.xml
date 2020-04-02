@@ -8,5 +8,6 @@
     <string name="edit_text_price">Enter price</string>
     <string name="edit_text_delivery_country">Enter the country of destination</string>
     <string name="edit_text_delivery_city">Enter the city of destination</string>
+    <string name="edit_text_email">email</string>
     <string name="button_save">Save</string>
 </resources>

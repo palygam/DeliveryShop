@@ -3,12 +3,15 @@ package com.example.deliveryshop.showproducts;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 import com.example.deliveryshop.R;
 import com.example.deliveryshop.base.BaseActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
-
 
 public class ShowProductsActivity extends BaseActivity implements ShowProductsView {
     private ShowProductsPresenter presenter;
@@ -22,6 +25,20 @@ public class ShowProductsActivity extends BaseActivity implements ShowProductsVi
         setupToolbar();
         presenter = new ShowProductsPresenter(this);
         presenter.generateRetrofitCall();
+        addActionButton();
+    }
+
+    private void addActionButton() {
+        FloatingActionButton floatingActionButton = findViewById(R.id.floating_action_button);
+        floatingActionButton.setOnClickListener(view -> {
+            //presenter.onClick(this, InputActivity.class);
+        });
+    }
+
+    @Override
+    public void navigateToNewActivity(Context context, Class nextActivity) {
+        Intent intent = new Intent(context, nextActivity);
+        context.startActivity(intent);
     }
 
     private void initRecyclerView() {
@@ -40,11 +57,6 @@ public class ShowProductsActivity extends BaseActivity implements ShowProductsVi
     public void setupToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-            toolbar.setNavigationOnClickListener(v -> onBackPressed());
-        }
     }
 
     @Override

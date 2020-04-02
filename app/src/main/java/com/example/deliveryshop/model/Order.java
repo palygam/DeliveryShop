@@ -24,13 +24,12 @@ public class Order {
     @Expose
     private String id;
 
-    public Order(Delivery delivery, Integer count, Integer price, String name, String email, String id) {
+    public Order(Delivery delivery, Integer count, Integer price, String name, String email) {
         this.delivery = delivery;
         this.count = count;
         this.price = price;
         this.name = name;
         this.email = email;
-        this.id = id;
     }
 
     public Delivery getDelivery() {
