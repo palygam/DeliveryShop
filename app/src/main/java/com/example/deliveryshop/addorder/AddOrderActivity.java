@@ -1,22 +1,18 @@
-package com.example.deliveryshop.inputactivity;
+package com.example.deliveryshop.addorder;
 
 import androidx.appcompat.widget.Toolbar;
-
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.example.deliveryshop.R;
 import com.example.deliveryshop.base.BaseActivity;
 import com.example.deliveryshop.model.Delivery;
 import com.example.deliveryshop.model.Order;
 import com.google.android.material.textfield.TextInputEditText;
 
-
-public class InputActivity extends BaseActivity implements InputActivityView {
-    private InputActivityPresenter presenter;
+public class AddOrderActivity extends BaseActivity implements AddOrderActivityView {
+    private AddOrderActivityPresenter presenter;
     private TextInputEditText editTextName;
     private TextInputEditText editTextEmail;
     private TextInputEditText editTextCount;
@@ -29,7 +25,7 @@ public class InputActivity extends BaseActivity implements InputActivityView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        presenter = new InputActivityPresenter(this);
+        presenter = new AddOrderActivityPresenter(this);
         setupToolbar();
         initComponents();
         setupInput();
@@ -47,21 +43,14 @@ public class InputActivity extends BaseActivity implements InputActivityView {
 
     public void setupInput() {
         buttonSave.setOnClickListener(view -> {
-            String name = editTextName.getText().toString();
-            int count = Integer.parseInt(editTextCount.getText().toString());
-            int price = Integer.parseInt(editTextPrice.getText().toString());
-            String country = editTextDeliveryCountry.getText().toString();
-            String city = editTextDeliveryCity.getText().toString();
-            String email = editTextEmail.getText().toString();
-            Order order = new Order(new Delivery(country, city), count, price, name, email);
-            presenter.generateRetrofitCall(order);
-            //presenter.onClick(this, ShowProductsActivity.class);
+            presenter.postNewOrderToServer();
+            presenter.onClick();
         });
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_input;
+        return R.layout.activity_add_order;
     }
 
     @Override
@@ -77,12 +66,23 @@ public class InputActivity extends BaseActivity implements InputActivityView {
 
     @Override
     public void showError() {
-        Toast.makeText(InputActivity.this, R.string.networking_error, Toast.LENGTH_SHORT).show();
+        Toast.makeText(AddOrderActivity.this, R.string.networking_error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void navigateToNewActivity(Context context, Class newActivity) {
-        Intent intent = new Intent(context, newActivity);
-        context.startActivity(intent);
+    public void navigateToShowProductsActivity() {
+        //  Intent intent = new Intent(this, ShowProductsActivity.class);
+        // startActivity(intent);
+    }
+
+    @Override
+    public Order getNewOrder() {
+        return new Order(new Delivery(
+                editTextDeliveryCountry.getText().toString(),
+                editTextDeliveryCity.getText().toString()),
+                Integer.parseInt(editTextCount.getText().toString()),
+                Integer.parseInt(editTextPrice.getText().toString()),
+                editTextName.getText().toString(),
+                editTextEmail.getText().toString());
     }
 }

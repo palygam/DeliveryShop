@@ -12,12 +12,9 @@ public class Delivery {
     @Expose
     private Object city;
 
-    public Delivery(Object country, Object city) {
+    public Delivery(String country, String city) {
         this.country = country;
         this.city = city;
-    }
-
-    public Delivery(String country, String city) {
 
     }
 
