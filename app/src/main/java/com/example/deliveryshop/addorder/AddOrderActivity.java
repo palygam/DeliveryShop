@@ -1,7 +1,6 @@
 package com.example.deliveryshop.addorder;
 
 import androidx.appcompat.widget.Toolbar;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
@@ -43,7 +42,7 @@ public class AddOrderActivity extends BaseActivity implements AddOrderActivityVi
 
     public void setupInput() {
         buttonSave.setOnClickListener(view -> {
-            presenter.postNewOrderToServer();
+            presenter.postNewOrderToServer(getNewOrder());
             presenter.onClick();
         });
     }
@@ -75,7 +74,6 @@ public class AddOrderActivity extends BaseActivity implements AddOrderActivityVi
         // startActivity(intent);
     }
 
-    @Override
     public Order getNewOrder() {
         return new Order(new Delivery(
                 editTextDeliveryCountry.getText().toString(),
