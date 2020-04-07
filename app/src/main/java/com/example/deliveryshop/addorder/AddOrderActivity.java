@@ -1,13 +1,17 @@
 package com.example.deliveryshop.addorder;
 
 import androidx.appcompat.widget.Toolbar;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
+
 import com.example.deliveryshop.R;
 import com.example.deliveryshop.base.BaseActivity;
 import com.example.deliveryshop.model.Delivery;
 import com.example.deliveryshop.model.Order;
+import com.example.deliveryshop.showorder.ShowOrdersActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class AddOrderActivity extends BaseActivity implements AddOrderActivityView {
@@ -69,8 +73,8 @@ public class AddOrderActivity extends BaseActivity implements AddOrderActivityVi
 
     @Override
     public void navigateToShowProductsActivity() {
-        //  Intent intent = new Intent(this, ShowProductsActivity.class);
-        // startActivity(intent);
+        Intent intent = new Intent(this, ShowOrdersActivity.class);
+        startActivity(intent);
     }
 
     private Order getNewOrder() {

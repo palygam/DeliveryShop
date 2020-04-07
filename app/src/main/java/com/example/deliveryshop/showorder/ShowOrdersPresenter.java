@@ -1,26 +1,32 @@
-package com.example.deliveryshop.addorder;
+package com.example.deliveryshop.showorder;
+
+import android.content.Context;
 
 import com.example.deliveryshop.CustomApplication;
 import com.example.deliveryshop.model.Order;
 import com.example.deliveryshop.model.OrderList;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddOrderActivityPresenter {
-    private AddOrderActivityView view;
+public class ShowOrdersPresenter {
+    private ShowOrdersView view;
+    private List<Order> orders;
 
-    public AddOrderActivityPresenter(AddOrderActivityView view) {
+    public ShowOrdersPresenter(ShowOrdersView view) {
         this.view = view;
     }
 
-    public void onSaveButtonClick(Order order) {
-        Call<OrderList> call = CustomApplication.getApi().addNewProduct(order);
+    public void generateRetrofitCall() {
+        Call<OrderList> call = CustomApplication.getApi().getAllOrders();
         call.enqueue(new Callback<OrderList>() {
             @Override
             public void onResponse(Call<OrderList> call, Response<OrderList> response) {
-                view.navigateToShowProductsActivity();
+                orders = response.body().getData();
+                view.setupAdapter(orders);
             }
 
             @Override
@@ -28,5 +34,9 @@ public class AddOrderActivityPresenter {
                 view.showError();
             }
         });
+    }
+
+    public void onClick() {
+        view.navigateToNewActivity();
     }
 }
