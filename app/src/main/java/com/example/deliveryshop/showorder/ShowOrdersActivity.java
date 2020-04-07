@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.deliveryshop.R;
+import com.example.deliveryshop.addorder.AddOrderActivity;
 import com.example.deliveryshop.base.BaseActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -38,8 +39,8 @@ public class ShowOrdersActivity extends BaseActivity implements ShowOrdersView {
 
 
     public void navigateToNewActivity() {
-        // Intent intent = new Intent(this, AddOrderActivity.class);
-        // startActivity(intent);
+        Intent intent = new Intent(this, AddOrderActivity.class);
+        startActivity(intent);
     }
 
     private void initRecyclerView() {
