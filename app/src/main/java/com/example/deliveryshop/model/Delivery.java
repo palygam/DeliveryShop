@@ -12,6 +12,12 @@ public class Delivery {
     @Expose
     private Object city;
 
+    public Delivery(String country, String city) {
+        this.country = country;
+        this.city = city;
+
+    }
+
     public Object getCountry() {
         return country;
     }
