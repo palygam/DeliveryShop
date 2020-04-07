@@ -1,6 +1,6 @@
 package com.example.deliveryshop.action;
 
-public enum ChooseAction {
+public enum ActionType {
     ADD,
     EDIT
 }

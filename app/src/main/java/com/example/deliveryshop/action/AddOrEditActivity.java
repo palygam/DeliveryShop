@@ -15,8 +15,8 @@ import com.example.deliveryshop.model.Order;
 import com.example.deliveryshop.showorder.ShowOrdersActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
-public class ActionActivity extends BaseActivity implements ActionView {
-    private ActionPresenter presenter;
+public class AddOrEditActivity extends BaseActivity implements AddOrEditView {
+    private AddOrEditPresenter presenter;
     private TextInputEditText editTextName;
     private TextInputEditText editTextEmail;
     private TextInputEditText editTextCount;
@@ -29,12 +29,12 @@ public class ActionActivity extends BaseActivity implements ActionView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        presenter = new ActionPresenter(this);
+        presenter = new AddOrEditPresenter(this);
         setupToolbar();
         initComponents();
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        ChooseAction action = (ChooseAction) bundle.getSerializable(Constants.ACTION);
+        ActionType action = (ActionType) bundle.getSerializable(Constants.ACTION);
         switch (action) {
             case ADD:
                 buttonSave.setOnClickListener(view -> presenter.addOrder(getNewOrder()));
@@ -76,7 +76,7 @@ public class ActionActivity extends BaseActivity implements ActionView {
 
     @Override
     public void showError() {
-        Toast.makeText(ActionActivity.this, R.string.networking_error, Toast.LENGTH_SHORT).show();
+        Toast.makeText(AddOrEditActivity.this, R.string.networking_error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -88,19 +88,8 @@ public class ActionActivity extends BaseActivity implements ActionView {
     @Override
     public void updateLabels(Order order) {
         if (order.getDelivery() != null) {
-            if (order.getDelivery().getCountry() == null) {
-                editTextDeliveryCountry.setText("");
-            } else {
-                editTextDeliveryCountry.setText(order.getDelivery().getCountry().toString());
-            }
-            if (order.getDelivery().getCity() == null) {
-                editTextDeliveryCity.setText("");
-            } else {
-                editTextDeliveryCity.setText(order.getDelivery().getCity().toString());
-            }
-        } else {
-            editTextDeliveryCountry.setText("");
-            editTextDeliveryCity.setText("");
+            editTextDeliveryCountry.setText(order.getDelivery().getCountry() == null ? "" : order.getDelivery().getCountry().toString());
+            editTextDeliveryCity.setText(order.getDelivery().getCity() == null ? "" : order.getDelivery().getCity().toString());
         }
         editTextCount.setText(String.valueOf(order.getCount()));
         editTextPrice.setText(String.valueOf(order.getPrice()));

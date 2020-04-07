@@ -2,7 +2,7 @@ package com.example.deliveryshop.action;
 
 import com.example.deliveryshop.model.Order;
 
-public interface ActionView {
+public interface AddOrEditView {
     void showError();
 
     void navigateToShowProductsActivity();

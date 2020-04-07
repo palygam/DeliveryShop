@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.deliveryshop.Constants;
 import com.example.deliveryshop.R;
-import com.example.deliveryshop.action.ActionActivity;
-import com.example.deliveryshop.action.ChooseAction;
+import com.example.deliveryshop.action.AddOrEditActivity;
+import com.example.deliveryshop.action.ActionType;
 import com.example.deliveryshop.base.BaseActivity;
 import com.example.deliveryshop.model.Order;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -39,9 +39,9 @@ public class ShowOrdersActivity extends BaseActivity implements ShowOrdersView {
     private void addActionButton() {
         FloatingActionButton floatingActionButton = findViewById(R.id.floating_action_button);
         floatingActionButton.setOnClickListener(view -> {
-            Intent intent = new Intent(this, ActionActivity.class);
+            Intent intent = new Intent(this, AddOrEditActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putSerializable(Constants.ACTION, ChooseAction.ADD);
+            bundle.putSerializable(Constants.ACTION, ActionType.ADD);
             intent.putExtras(bundle);
             presenter.onClick();
         });
@@ -49,7 +49,7 @@ public class ShowOrdersActivity extends BaseActivity implements ShowOrdersView {
 
 
     public void navigateToNewActivity() {
-        Intent intent = new Intent(this, ActionActivity.class);
+        Intent intent = new Intent(this, AddOrEditActivity.class);
         startActivity(intent);
     }
 
@@ -86,12 +86,12 @@ public class ShowOrdersActivity extends BaseActivity implements ShowOrdersView {
     @Override
     public void onClick() {
         adapter.setOnItemClickListener(v -> {
-            Intent intent = new Intent(this, ActionActivity.class);
+            Intent intent = new Intent(this, AddOrEditActivity.class);
             RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) v.getTag();
             int position = viewHolder.getAdapterPosition();
             Bundle bundle = new Bundle();
             bundle.putSerializable(Constants.ORDER_FOR_UPDATE, adapter.getOrder(position));
-            bundle.putSerializable(Constants.ACTION, ChooseAction.EDIT);
+            bundle.putSerializable(Constants.ACTION, ActionType.EDIT);
             intent.putExtras(bundle);
             startActivity(intent);
 

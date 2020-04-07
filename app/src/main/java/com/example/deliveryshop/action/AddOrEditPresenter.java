@@ -8,10 +8,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ActionPresenter {
-    private ActionView view;
+public class AddOrEditPresenter {
+    private AddOrEditView view;
 
-    public ActionPresenter(ActionView view) {
+    public AddOrEditPresenter(AddOrEditView view) {
         this.view = view;
     }
 
