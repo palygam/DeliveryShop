@@ -42,8 +42,7 @@ public class AddOrderActivity extends BaseActivity implements AddOrderActivityVi
 
     public void setupInput() {
         buttonSave.setOnClickListener(view -> {
-            presenter.postNewOrderToServer(getNewOrder());
-            presenter.onClick();
+            presenter.onSaveButtonClick(getNewOrder());
         });
     }
 
@@ -74,7 +73,7 @@ public class AddOrderActivity extends BaseActivity implements AddOrderActivityVi
         // startActivity(intent);
     }
 
-    public Order getNewOrder() {
+    private Order getNewOrder() {
         return new Order(new Delivery(
                 editTextDeliveryCountry.getText().toString(),
                 editTextDeliveryCity.getText().toString()),

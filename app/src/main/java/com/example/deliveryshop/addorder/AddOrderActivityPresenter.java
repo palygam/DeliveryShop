@@ -14,22 +14,17 @@ public class AddOrderActivityPresenter {
         this.view = view;
     }
 
-    public void postNewOrderToServer(Order order) {
+    public void onSaveButtonClick(Order order) {
         Call<OrderList> call = CustomApplication.getApi().addNewProduct(order);
         call.enqueue(new Callback<OrderList>() {
             @Override
             public void onResponse(Call<OrderList> call, Response<OrderList> response) {
                 view.navigateToShowProductsActivity();
             }
-
             @Override
             public void onFailure(Call<OrderList> call, Throwable t) {
                 view.showError();
             }
         });
-    }
-
-    public void onClick() {
-        view.navigateToShowProductsActivity();
     }
 }
