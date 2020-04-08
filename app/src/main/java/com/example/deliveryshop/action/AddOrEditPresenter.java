@@ -15,7 +15,7 @@ public class AddOrEditPresenter {
         this.view = view;
     }
 
-    public void addOrder(Order order) {
+    public void onOrderAdded(Order order) {
         Call<OrderList> call = CustomApplication.getApi().addProduct(order);
         call.enqueue(new Callback<OrderList>() {
             @Override
@@ -30,7 +30,7 @@ public class AddOrEditPresenter {
         });
     }
 
-    public void updateOrder(Order order) {
+    public void onOrderUpdated(Order order) {
         Call<Order> call = CustomApplication.getApi().updateOrder(order.getId(), order);
         call.enqueue(new Callback<Order>() {
             @Override

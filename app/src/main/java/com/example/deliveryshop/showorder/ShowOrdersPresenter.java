@@ -18,7 +18,7 @@ public class ShowOrdersPresenter {
         this.view = view;
     }
 
-    public void getOrders() {
+    public void onOrdersLoaded() {
         Call<OrderList> call = CustomApplication.getApi().getAllOrders();
         call.enqueue(new Callback<OrderList>() {
             @Override
@@ -34,7 +34,7 @@ public class ShowOrdersPresenter {
         });
     }
 
-    public void deleteOrder(Order order) {
+    public void onOrderDeleted(Order order) {
         Call<Order> call = CustomApplication.getApi().deleteOrder(order.getId());
         call.enqueue(new Callback<Order>() {
             @Override

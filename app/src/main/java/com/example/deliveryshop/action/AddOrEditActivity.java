@@ -37,16 +37,16 @@ public class AddOrEditActivity extends BaseActivity implements AddOrEditView {
         ActionType action = (ActionType) bundle.getSerializable(Constants.ACTION);
         switch (action) {
             case ADD:
-                buttonSave.setOnClickListener(view -> presenter.addOrder(getNewOrder()));
+                buttonSave.setOnClickListener(view -> presenter.onOrderAdded(getNewOrder()));
                 break;
             case EDIT:
                 Order order = (Order) bundle.getSerializable(Constants.ORDER_FOR_UPDATE);
                 updateLabels(order);
                 editOrder(order);
-        break;
-    }
+                break;
+        }
 
-}
+    }
 
     public void initComponents() {
         editTextName = findViewById(R.id.edit_text_name);
@@ -103,7 +103,7 @@ public class AddOrEditActivity extends BaseActivity implements AddOrEditView {
         buttonSave.setOnClickListener(v -> {
             Order orderForUpdate = getNewOrder();
             orderForUpdate.setId(orderId);
-            presenter.updateOrder(orderForUpdate);
+            presenter.onOrderUpdated(orderForUpdate);
         });
     }
 
