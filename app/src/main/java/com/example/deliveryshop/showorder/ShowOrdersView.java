@@ -12,4 +12,8 @@ public interface ShowOrdersView {
     void setupAdapter(List<Order> orders);
 
     void showError();
+
+    void onClick();
+
+    void onLongClick();
 }

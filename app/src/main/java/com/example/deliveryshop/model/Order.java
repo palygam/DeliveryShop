@@ -3,7 +3,9 @@ package com.example.deliveryshop.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable {
 
     @SerializedName("delivery")
     @Expose

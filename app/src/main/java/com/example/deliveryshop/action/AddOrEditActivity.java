@@ -1,12 +1,13 @@
-package com.example.deliveryshop.addorder;
-
-import androidx.appcompat.widget.Toolbar;
+package com.example.deliveryshop.action;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.Toolbar;
+
+import com.example.deliveryshop.Constants;
 import com.example.deliveryshop.R;
 import com.example.deliveryshop.base.BaseActivity;
 import com.example.deliveryshop.model.Delivery;
@@ -14,8 +15,8 @@ import com.example.deliveryshop.model.Order;
 import com.example.deliveryshop.showorder.ShowOrdersActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
-public class AddOrderActivity extends BaseActivity implements AddOrderActivityView {
-    private AddOrderActivityPresenter presenter;
+public class AddOrEditActivity extends BaseActivity implements AddOrEditView {
+    private AddOrEditPresenter presenter;
     private TextInputEditText editTextName;
     private TextInputEditText editTextEmail;
     private TextInputEditText editTextCount;
@@ -28,10 +29,23 @@ public class AddOrderActivity extends BaseActivity implements AddOrderActivityVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        presenter = new AddOrderActivityPresenter(this);
+        presenter = new AddOrEditPresenter(this);
         setupToolbar();
         initComponents();
-        setupInput();
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        ActionType action = (ActionType) bundle.getSerializable(Constants.ACTION);
+        switch (action) {
+            case ADD:
+                buttonSave.setOnClickListener(view -> presenter.onOrderAdded(getNewOrder()));
+                break;
+            case EDIT:
+                Order order = (Order) bundle.getSerializable(Constants.ORDER_FOR_UPDATE);
+                updateLabels(order);
+                editOrder(order);
+                break;
+        }
+
     }
 
     public void initComponents() {
@@ -42,12 +56,6 @@ public class AddOrderActivity extends BaseActivity implements AddOrderActivityVi
         editTextDeliveryCountry = findViewById(R.id.edit_text_delivery_country);
         editTextDeliveryCity = findViewById(R.id.edit_text_delivery_city);
         buttonSave = findViewById(R.id.button_save);
-    }
-
-    public void setupInput() {
-        buttonSave.setOnClickListener(view -> {
-            presenter.onSaveButtonClick(getNewOrder());
-        });
     }
 
     @Override
@@ -68,13 +76,35 @@ public class AddOrderActivity extends BaseActivity implements AddOrderActivityVi
 
     @Override
     public void showError() {
-        Toast.makeText(AddOrderActivity.this, R.string.networking_error, Toast.LENGTH_SHORT).show();
+        Toast.makeText(AddOrEditActivity.this, R.string.networking_error, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void navigateToShowProductsActivity() {
         Intent intent = new Intent(this, ShowOrdersActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void updateLabels(Order order) {
+        if (order.getDelivery() != null) {
+            editTextDeliveryCountry.setText(order.getDelivery().getCountry() == null ? "" : order.getDelivery().getCountry().toString());
+            editTextDeliveryCity.setText(order.getDelivery().getCity() == null ? "" : order.getDelivery().getCity().toString());
+        }
+        editTextCount.setText(String.valueOf(order.getCount()));
+        editTextPrice.setText(String.valueOf(order.getPrice()));
+        editTextName.setText(order.getName());
+        editTextEmail.setText(order.getEmail());
+    }
+
+    @Override
+    public void editOrder(Order order) {
+        String orderId = order.getId();
+        buttonSave.setOnClickListener(v -> {
+            Order orderForUpdate = getNewOrder();
+            orderForUpdate.setId(orderId);
+            presenter.onOrderUpdated(orderForUpdate);
+        });
     }
 
     private Order getNewOrder() {

@@ -10,4 +10,9 @@
     <string name="edit_text_delivery_city">Enter the city of destination</string>
     <string name="edit_text_email">email</string>
     <string name="button_save">Save</string>
+    <string name="dialog_delete">You really want delete this order ? </string>
+    <string name="dialog_yes"> Yes </string>
+    <string name="dialog_no"> No </string>
+    <string name="add_order_item"> Add order </string>
+    <string name="settings_item"> Settings </string>
 </resources>
